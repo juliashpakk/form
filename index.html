@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="login-page.js"></script>
+</head>
+
+<body>
+ <div class="container">
+    <h1 class="a1">Форма</h1>
+    <form id="login-form">
+    <p class="a1">Фамилия участника</p>
+    <div class="col-1">
+    <input type="text" id="surname" placeholder="Введите фамилию"><br>
+    </div>
+    <p class="a1">Имя участника</p>
+    <div class="col-1">
+    <input type="text" id="firstname" placeholder="Введите имя"><br>
+    </div>
+    <p class="a1">Номер телефона</p>
+    <div class="col-1">
+    <input type="text" id="number" placeholder="Введите номер телефона"><br>
+    </div>
+    <p class="a1">Адрес электронной почты</p>
+    <div class="col-1">
+    <input type="text" id="email" placeholder="Введите адрес электронной почты"><br>
+        </div>
+        <div class="col-3">
+            <label for="pasport">Загрузите фото Вашего паспорта </label>
+             <input type="file"
+               id="file"
+               accept="image/png, image/jpeg">
+            </div>    
+        <p class="a1">Выберите Ваш возрастной диапазон</p>
+        <div class="col-2">
+            <select id="val">
+                <option value="0-18">0-18</option>
+                <option value="19-30">19-30</option>
+                <option value="31-50">31-50</option>
+                <option value="51-65">51-65</option>
+                <option value="66-80">66-80</option>
+            </select>
+          </div>
+          <p class="a1">Напишите короткое эссе о себе и о своих интересах.</p>
+          <div class="col-1">
+            <textarea placeholder="Эссе..." id="essay" style="height:150px" maxlength="1000"></textarea>
+          </div>
+    <div class="col-11">
+        <p><input type="checkbox" id="check"> Я даю согласие на использование личных данных</p>
+    </div>
+    <input type="button" value="Сохранить" onclick="go()">
+    </form>
+  
+</div>
+</body>
+
+</html>
+<script>
+   function go() {
+  var el1 = document.getElementById('surname');
+  var el2 = document.getElementById('firstname');
+  var el3 = document.getElementById('number');
+  var el4 = document.getElementById('email');
+  var el5 = document.getElementById('essay');
+  var snl1 = el1.value.length;
+  var snl2 = el2.value.length;
+  var snl3 = el3.value.length;
+  var snl4 = el5.value.length;
+  var re = /^[\d\+][\d\(\)\ -]{4,14}\d$/;
+  var re2 = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+  var myPhone = document.getElementById('number').value;
+  var valid = re.test(myPhone);
+  var myMail = document.getElementById('email').value;
+    var valid2 = re2.test(myMail);
+  if (snl1 == 0) {
+    alert("Поле фамилия должно быть заполнено!");
+    el1.classList.add("warning");
+    el1.focus();
+    setTimeout(function() { 
+      el1.classList.remove("warning"); 
+    }, 2000);
+  }else if (snl2 == 0) {
+    alert("Поле имя должно быть заполнено!");
+    el2.classList.add("warning");
+    el2.focus();
+    setTimeout(function() { 
+      el2.classList.remove("warning"); 
+    }, 2000);
+  }else if ( !valid || number.value == '') {
+    alert("В поле номер телефона есть буквы, или поле не заполнено!");
+    el3.classList.add("warning");
+    el3.focus();
+    setTimeout(function() { 
+      el3.classList.remove("warning"); 
+    }, 2000);
+  }else if ( !valid2 || email.value == '') {
+    alert("Адрес электронной почты введён некорректно!");
+    el4.classList.add("warning");
+    el4.focus();
+    setTimeout(function() { 
+      el3.classList.remove("warning"); 
+    }, 2000);
+}else if( !file.value ){
+    alert("Вы не выбрали файл!");
+}else if (snl4 == 0) {
+    alert("Поле эссе должно быть заполнено!");
+    el5.classList.add("warning");
+    el5.focus();
+    setTimeout(function() { 
+      el5.classList.remove("warning"); 
+    }, 2000);
+}else if (!check.checked) {
+    alert("Пожалуйста, подтвердите использование личной информации!");
+}
+  else{
+    alert("Форма удачно заполнена");
+    surname.value="";
+    firstname.value="";
+    number.value="";
+    email.value="";
+    essay.value="";
+    file.value="";
+    document.getElementById("check").checked = false;
+  }
+
+}
+</script>
